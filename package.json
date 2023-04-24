@@ -1,9 +1,12 @@
 {
   "name": "vite-reactts-eslint-prettier",
   "version": "0.0.0",
+  "homepage": "https://yuriy-khoptyanii.github.io/test-Board-with-Vite",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "serve": "vite preview",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
@@ -35,6 +38,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "gh-pages": "^5.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.5.1",
     "typescript": "^4.5.5",

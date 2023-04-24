@@ -1,19 +1,18 @@
 import './App.css';
 
 import React from 'react';
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { LoadingForm } from './components/loadingForm/LoadingForm';
 import { TaskList } from './components/taskList/TaskList';
-import { store } from './store';
+import { IssueState } from './types/allTypes';
 
 export const App: React.FC = () => {
+  const { urlRepo } = useSelector((state: IssueState) => state.issues);
   return (
-    <Provider store={store}>
-      <div className="App">
-        <LoadingForm />
-        <TaskList />
-      </div>
-    </Provider>
+    <div className="App">
+      <LoadingForm />
+      {urlRepo && <TaskList />}
+    </div>
   );
 };

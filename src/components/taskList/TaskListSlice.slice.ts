@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IssueState } from '../../types/issue';
+import { Issue, IssueState, movePayload } from '../../types/allTypes';
 
 const initialState: IssueState = {
   columns: {
@@ -22,40 +22,64 @@ const initialState: IssueState = {
     },
   },
   issues: {},
+  key: '',
+  urlOwner: '',
+  urlRepo: '',
+  owner: '',
+  repo: '',
 };
 
 export const issuesSlice = createSlice({
   name: 'issues',
   initialState,
   reducers: {
-    setIssues: (state, action) => {
-      const issues = action.payload;
-      issues.forEach((issue) => {
-        state.issues[issue.id] = issue;
-        if (issue.state === 'open') {
-          if (issue.comments === 0) {
-            state.columns.toDo.issueIds.push(issue.id);
-          } else {
-            state.columns.inProgress.issueIds.push(issue.id);
-          }
-        } else {
-          state.columns.done.issueIds.push(issue.id);
-        }
-      });
+    setUrls: (state, action) => {
+      state.urlRepo = action.payload.urlRepo;
+      state.urlOwner = action.payload.urlOwner;
+      state.owner = action.payload.owner;
+      state.repo = action.payload.repo;
     },
-    moveIssue: (state, action) => {
+    setIssues: (state, action) => {
+      const issues = action.payload.data;
+      const key = action.payload.key;
+      state.key = key;
+
+      if (!localStorage.getItem(key)) {
+        issues.forEach((issue: Issue) => {
+          state.issues[issue.id] = issue;
+          if (issue.state === 'open') {
+            if (issue.comments === 0) {
+              state.columns.toDo.issueIds.push(issue.id.toString());
+            } else {
+              state.columns.inProgress.issueIds.push(issue.id.toString());
+            }
+          } else {
+            state.columns.done.issueIds.push(issue.id.toString());
+          }
+        });
+        localStorage.setItem(key, JSON.stringify(state));
+      } else {
+        const storedState = JSON.parse(localStorage.getItem(key) as string);
+        Object.assign(state, storedState);
+      }
+    },
+
+    moveIssue: (state, action: PayloadAction<movePayload>) => {
       const { issueId, sourceColumnId, destinationColumnId, destinationIndex } =
         action.payload;
+
       const sourceColumn = state.columns[sourceColumnId];
       const destinationColumn = state.columns[destinationColumnId];
-      const final = sourceColumn.issueIds.filter((el) => +el !== +issueId);
+      const final = sourceColumn.issueIds.filter((el: string) => +el !== +issueId);
       sourceColumn.issueIds = final;
 
       destinationColumn.issueIds.splice(destinationIndex, 0, issueId);
+
+      localStorage.setItem(state.key, JSON.stringify(state));
     },
   },
 });
 
-export const { setIssues, moveIssue } = issuesSlice.actions;
+export const { setIssues, moveIssue, setUrls } = issuesSlice.actions;
 
 export default issuesSlice.reducer;

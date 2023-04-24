@@ -1,20 +1,20 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
-import { ColumnInfo, Issue } from '../../types/issue';
-// import { Issue } from '../../types/issue';
+import { ColumnInfo, Issue } from '../../types/allTypes';
 import { Card } from '../card/Card';
 
 type Props = {
   column: ColumnInfo;
-  issues: any;
+  issues: {
+    [id: string]: Issue;
+  };
 };
 
 export const Column: React.FC<Props> = ({ column, issues }) => {
   return (
-    <Container className="bg-light" style={{ height: 'max-content' }}>
+    <Container className="bg-light">
       <Row>
         <Col>
           <p className="fs-5 fw-bold text-center">{column.title}</p>
@@ -24,7 +24,7 @@ export const Column: React.FC<Props> = ({ column, issues }) => {
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {column.issueIds.map((issueId, index) => {
-              const issue = issues[issueId];
+              const issue = issues[+issueId];
               return (
                 <Row key={issue.id}>
                   <Col>

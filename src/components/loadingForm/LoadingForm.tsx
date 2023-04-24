@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { setIssues } from '../taskList/TaskListSlice.slice';
+import { setIssues, setUrls } from '../taskList/TaskListSlice.slice';
 
 export const LoadingForm: React.FC = () => {
   const [searchUrl, setSearchUrl] = useState('');
@@ -18,7 +18,13 @@ export const LoadingForm: React.FC = () => {
       `https://api.github.com/repos/${owner}/${repo}/issues?state=all`,
     );
     const data = await response.json();
-    dispatch(setIssues(data));
+    const key = `${owner + repo}`;
+    const urlRepo = searchUrl;
+    const urlOwner = `https://github.com/${owner}/`;
+
+    dispatch(setIssues({ data, key }));
+    dispatch(setUrls({ urlRepo, urlOwner, owner, repo }));
+    setSearchUrl('');
   };
 
   return (
@@ -28,7 +34,7 @@ export const LoadingForm: React.FC = () => {
           placeholder="Enter repo Url"
           style={{ width: '700px', marginRight: '10px' }}
           value={searchUrl}
-          onChange={(event) => setSearchUrl(event.target.value)}
+          onChange={(event) => setSearchUrl(event.target.value.trim())}
         />
         <Button variant="primary" onClick={() => loadingIssues()}>
           Load Issues

@@ -2,11 +2,11 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import IssueCard from 'react-bootstrap/Card';
 
-import { Issue } from '../../types/issue';
+import { IssueColumn } from '../../types/allTypes';
 import { TimeAdapt } from '../../utils/TimeAdapt';
 
 type Props = {
-  issue: Issue;
+  issue: IssueColumn;
   index: number;
 };
 

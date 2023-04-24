@@ -1,17 +1,19 @@
 import './TaskList.css';
 
 import React from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '../../store';
+import { StatusColumn } from '../../types/allTypes';
 import { Column } from '../column/Column';
 import { moveIssue } from './TaskListSlice.slice';
 
 export const TaskList: React.FC = () => {
   const dispatch = useDispatch();
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
     if (!destination) {
       return;
@@ -20,28 +22,37 @@ export const TaskList: React.FC = () => {
     dispatch(
       moveIssue({
         issueId: draggableId,
-        sourceColumnId: source.droppableId,
-        destinationColumnId: destination.droppableId,
+        sourceColumnId: source.droppableId as StatusColumn,
+        destinationColumnId: destination.droppableId as StatusColumn,
         destinationIndex: destination.index,
       }),
     );
   };
 
-  const { columns, issues } = useSelector((state) => state.issues);
+  const { columns, issues, urlOwner, urlRepo, repo, owner } = useSelector(
+    (state: RootState) => state.issues,
+  );
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="TaskList">
-        {Object.values(columns).map((column) => (
-          <Container key={column.id}>
-            <Row>
-              <Col>
-                <Column column={column} issues={issues} />
-              </Col>
-            </Row>
-          </Container>
-        ))}
+    <>
+      <div className="TaskList_url">
+        <a href={urlOwner}>{owner.charAt(0).toUpperCase() + owner.slice(1)}</a>
+        <p>{'>'}</p>
+        <a href={urlRepo}>{repo.charAt(0).toUpperCase() + repo.slice(1)}</a>
       </div>
-    </DragDropContext>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="TaskList_column">
+          {Object.values(columns).map((column) => (
+            <Container key={column.id}>
+              <Row>
+                <Col>
+                  <Column column={column} issues={issues} />
+                </Col>
+              </Row>
+            </Container>
+          ))}
+        </div>
+      </DragDropContext>
+    </>
   );
 };

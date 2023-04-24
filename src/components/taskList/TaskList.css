@@ -1,5 +1,13 @@
-.TaskList {
+.TaskList_url {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.TaskList_column {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 10px;
+  height: max-content;
+  background-color: lightgray;
 }

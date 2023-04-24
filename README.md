@@ -1,37 +1,32 @@
-# Vite + React + Typescript + Eslint + Prettier
+# Github Kanban Board
 
-A starter for React with Typescript with the fast Vite and all static code testing with Eslint and formatting with Prettier.
+## How to start
 
-![Vite + React + Typescript + Eslint + Prettier](/resources/screenshot.png)
+### visit the demo page.
+### To run locally:
+1. Clone the project to your local machine
+2. npm install
+3. npm start
+4. Open the app in your web browser by navigating to http://localhost:300
 
-I found out about Vite and I wanted to have a boilerplate for the technologies that I use. You can find more about these in the following links: [Vite](https://github.com/vitejs/vite), [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Eslint](https://eslint.org/), [Prettier](https://prettier.io/).
+## How to use
+GitHub repo issues viewer as a kanban board.
 
-## Installation
+1. You can enter repo URL in the input on top of the page and press "Load". For example: https://github.com/facebook/react.
+You will see the problems divided by columns:
+    - ToDo
+    - In Progress
+    - Done 
+2. After uploading issues, you can drag them between columns or within a single column.
 
-Clone the repo and run `yarn install`
+3. You can also visit the repository owner's page and the repository itself on Github via the link above the board.
 
-or Run command
+4. Also, if you go to another repository and then return to the first - all your changes will be saved.
 
-```
-npx degit TheSwordBreaker/vite-reactts-eslint-prettier project-name
-```
-
-## Start
-
-After the successfull installation of the packages: `yarn dev`
-
-## Steps in Vscode
-
-#### (works with better with this template)
-
-1. Install Eslint and prettier extension for vs code.
-2. Make Sure Both are enabled
-3. Make sure all packages are Installed. (Mostly Eslint and prettier in node_modules)
-4. Enable formatOnSave of vs code
-5. Open a .tsx file and check if the bottom right corners of vs code have Eslint and Prettier with a double tick
-
-![Screenshot (253)_LI](https://user-images.githubusercontent.com/52120562/162486286-7383a737-d555-4f9b-a4dd-c4a81deb7b96.jpg)
-
-If Everything is Good Then It Should Work, but let me new if something else happens
-
-Made with ❤️ by theSwordBreaker(we Destory all types of sword ⚡)
+## Technologies
+  - React 18 with hooks
+  - Typescript
+  - React-Bootstrap
+  - Redux-Toolkit
+  - Date-Fns
+  - React-Beautiful-DnD

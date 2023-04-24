@@ -2,7 +2,7 @@
 
 ## How to start
 
-### visit the demo page.
+### visit the [demo page](https://yuriy-khoptyanii.github.io/test-Board-with-Vite).
 
 ### To run locally:
 

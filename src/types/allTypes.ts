@@ -33,6 +33,7 @@ export interface IssueState {
 }
 
 export type StatusColumn = 'toDo' | 'inProgress' | 'done';
+
 export interface movePayload {
   issueId: string;
   sourceColumnId: StatusColumn;

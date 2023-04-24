@@ -14,10 +14,10 @@ type Props = {
 
 export const Column: React.FC<Props> = ({ column, issues }) => {
   return (
-    <Container className="bg-light">
+    <Container className="bg-light rounded-4">
       <Row>
         <Col>
-          <p className="fs-5 fw-bold text-center">{column.title}</p>
+          <p className="fs-5 fw-bold text-center mt-3">{column.title}</p>
         </Col>
       </Row>
       <Droppable droppableId={column.id}>

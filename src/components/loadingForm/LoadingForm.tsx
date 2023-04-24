@@ -24,7 +24,6 @@ export const LoadingForm: React.FC = () => {
 
     dispatch(setIssues({ data, key }));
     dispatch(setUrls({ urlRepo, urlOwner, owner, repo }));
-    setSearchUrl('');
   };
 
   return (
@@ -36,12 +35,18 @@ export const LoadingForm: React.FC = () => {
           value={searchUrl}
           onChange={(event) => setSearchUrl(event.target.value.trim())}
         />
-        <Button variant="primary" onClick={() => loadingIssues()}>
+        <Button
+          disabled={searchUrl.length === 0}
+          variant="primary"
+          onClick={() => loadingIssues()}
+        >
           Load Issues
         </Button>
       </div>
 
-      <p> Please, enter example: https://github.com/facebook/react</p>
+      {searchUrl.length === 0 && (
+        <p> Please, enter example: https://github.com/facebook/react</p>
+      )}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Issue, IssueState, movePayload } from '../../types/allTypes';
 
-const initialState: IssueState = {
+export const initialState: IssueState = {
   columns: {
     toDo: {
       id: 'toDo',

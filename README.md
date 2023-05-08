@@ -16,10 +16,10 @@
 GitHub repo issues viewer as a kanban board.
 
 1. You can enter repo URL in the input on top of the page and press "Load". For example: https://github.com/facebook/react.
-   You will see the problems divided by columns: 
-      - ToDo 
-      - In Progress 
-      - Done
+   You will see the problems divided by columns:
+   - ToDo
+   - In Progress
+   - Done
 2. After uploading issues, you can drag them between columns or within a single column.
 
 3. You can also visit the repository owner's page and the repository itself on Github via the link above the board.

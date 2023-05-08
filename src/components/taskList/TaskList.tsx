@@ -41,7 +41,7 @@ export const TaskList: React.FC = memo(() => {
         <a href={urlRepo}>{repo.charAt(0).toUpperCase() + repo.slice(1)}</a>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="TaskList_column" data-testid="TaskList">
+        <div className="TaskList_column">
           {Object.values(columns).map((column) => (
             <Container key={column.id}>
               <Row>

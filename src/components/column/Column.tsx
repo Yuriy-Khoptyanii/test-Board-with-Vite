@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { Col, Container, Row } from 'react-bootstrap';
 
@@ -12,7 +12,7 @@ type Props = {
   };
 };
 
-export const Column: React.FC<Props> = ({ column, issues }) => {
+export const Column: React.FC<Props> = memo(({ column, issues }) => {
   return (
     <Container className="bg-light rounded-4">
       <Row>
@@ -39,4 +39,6 @@ export const Column: React.FC<Props> = ({ column, issues }) => {
       </Droppable>
     </Container>
   );
-};
+});
+
+Column.displayName = 'Column';

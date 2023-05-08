@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import IssueCard from 'react-bootstrap/Card';
 
@@ -10,7 +10,7 @@ type Props = {
   index: number;
 };
 
-export const Card: React.FC<Props> = ({ issue, index }) => {
+export const Card: React.FC<Props> = memo(({ issue, index }) => {
   return (
     <Draggable key={issue.id} draggableId={issue.id.toString()} index={index}>
       {(provided) => (
@@ -34,4 +34,6 @@ export const Card: React.FC<Props> = ({ issue, index }) => {
       )}
     </Draggable>
   );
-};
+});
+
+Card.displayName = 'Card';

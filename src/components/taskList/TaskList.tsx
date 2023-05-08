@@ -1,6 +1,6 @@
 import './TaskList.css';
 
-import React from 'react';
+import React, { memo } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import { StatusColumn } from '../../types/allTypes';
 import { Column } from '../column/Column';
 import { moveIssue } from './TaskListSlice.slice';
 
-export const TaskList: React.FC = () => {
+export const TaskList: React.FC = memo(() => {
   const dispatch = useDispatch();
 
   const onDragEnd = (result: DropResult) => {
@@ -33,7 +33,7 @@ export const TaskList: React.FC = () => {
     (state: RootState) => state.issues,
   );
 
-  return (
+  return urlRepo.length > 0 ? (
     <>
       <div className="TaskList_url">
         <a href={urlOwner}>{owner.charAt(0).toUpperCase() + owner.slice(1)}</a>
@@ -54,5 +54,7 @@ export const TaskList: React.FC = () => {
         </div>
       </DragDropContext>
     </>
-  );
-};
+  ) : null;
+});
+
+TaskList.displayName = 'TaskList';

@@ -1,18 +1,17 @@
 import './App.css';
 
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { memo } from 'react';
 
 import { LoadingForm } from './components/loadingForm/LoadingForm';
 import { TaskList } from './components/taskList/TaskList';
-import { IssueState } from './types/allTypes';
 
-export const App: React.FC = () => {
-  const { urlRepo } = useSelector((state: IssueState) => state.issues);
+const App: React.FC = () => {
   return (
     <div className="App">
       <LoadingForm />
-      {urlRepo && <TaskList />}
+      <TaskList />
     </div>
   );
 };
+
+export default memo(App);

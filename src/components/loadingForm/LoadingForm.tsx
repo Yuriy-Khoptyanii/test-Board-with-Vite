@@ -1,21 +1,20 @@
 import './LoadingForm.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { loadingIssues } from '../../api/Index';
+import { loadingIssues } from '../../api/index';
 import { setIssues, setUrls } from '../taskList/TaskListSlice.slice';
 
-export const LoadingForm: React.FC = () => {
+export const LoadingForm: React.FC = memo(() => {
   const [searchUrl, setSearchUrl] = useState('');
 
   const dispatch = useDispatch();
 
   const handleLoad = async () => {
     const { data, key, urlRepo, urlOwner, owner, repo } = await loadingIssues(searchUrl);
-
     dispatch(setIssues({ data, key }));
     dispatch(setUrls({ urlRepo, urlOwner, owner, repo }));
   };
@@ -33,6 +32,7 @@ export const LoadingForm: React.FC = () => {
           disabled={searchUrl.length === 0}
           variant="primary"
           onClick={() => handleLoad()}
+          data-testid="button"
         >
           Load Issues
         </Button>
@@ -43,4 +43,6 @@ export const LoadingForm: React.FC = () => {
       )}
     </div>
   );
-};
+});
+
+LoadingForm.displayName = 'LoadingForm';

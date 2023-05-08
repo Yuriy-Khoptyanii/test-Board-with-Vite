@@ -34,6 +34,7 @@ export const issuesSlice = createSlice({
   initialState,
   reducers: {
     setUrls: (state, action) => {
+      console.log(action.payload);
       state.urlRepo = action.payload.urlRepo;
       state.urlOwner = action.payload.urlOwner;
       state.owner = action.payload.owner;
